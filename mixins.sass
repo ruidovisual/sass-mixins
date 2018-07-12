@@ -16,7 +16,7 @@
 @function rotateDeg($x:0, $y:0, $z:0)
   @return rotateX(#{$x}deg) rotateY(#{$y}deg) rotateZ(#{$z}deg)
 
-@mixin triangle($size: 10px, $color: #000, $direction: 'down',)
+@mixin triangle($size: 10px, $color: #000, $direction: 'down')
   width: 0
   height: 0
   @if $direction == 'down'
