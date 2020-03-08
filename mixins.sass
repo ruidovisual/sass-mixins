@@ -16,6 +16,32 @@
 @function rotateDeg($x:0, $y:0, $z:0)
   @return rotateX(#{$x}deg) rotateY(#{$y}deg) rotateZ(#{$z}deg)
 
+@mixin animator($name, $arguments)
+  //$duration: .3s, $ease: linear, $delay: 0, $iteration: 1, $fillmode: forwards, $direction: normal
+  $duration: map-get($arguments, duration)
+  $delay: map-get($arguments, delay)
+  $iteration-count: map-get($arguments, iteration-count)
+  $timing-function: map-get($arguments, timing-function)
+  $fill-mode: map-get($arguments, fill-mode)
+  $direction: map-get($arguments, direction)
+  //DEFAULTS
+  $duration: .3s !default
+  $delay: 0s !default
+  $iteration-count: 1 !default
+  $timing-function: linear !default
+  $fill-mode: forwards !default
+  $direction: normal !default
+  @at-root
+    @keyframes #{$name}
+      @content
+  animation-name: $name
+  animation-duration: $duration
+  animation-delay: $delay
+  animation-iteration-count: $iteration-count
+  animation-timing-function: $timing-function
+  animation-fill-mode: $fill-mode 
+  animation-direction: $direction
+
 @mixin triangle($size: 10px, $color: #000, $direction: 'down')
   width: 0
   height: 0
@@ -86,28 +112,3 @@
   height: $height 
 
 
-@mixin animator($name, $arguments)
-  //$duration: .3s, $ease: linear, $delay: 0, $iteration: 1, $fillmode: forwards, $direction: normal
-  $duration: map-get($arguments, duration)
-  $delay: map-get($arguments, delay)
-  $iteration-count: map-get($arguments, iteration-count)
-  $timing-function: map-get($arguments, timing-function)
-  $fill-mode: map-get($arguments, fill-mode)
-  $direction: map-get($arguments, direction)
-  //DEFAULTS
-  $duration: .3s !default
-  $delay: 0s !default
-  $iteration-count: 1 !default
-  $timing-function: linear !default
-  $fill-mode: forwards !default
-  $direction: normal !default
-  @at-root
-    @keyframes #{$name}
-      @content
-  animation-name: $name
-  animation-duration: $duration
-  animation-delay: $delay
-  animation-iteration-count: $iteration-count
-  animation-timing-function: $timing-function
-  animation-fill-mode: $fill-mode 
-  animation-direction: $direction
